@@ -13,7 +13,7 @@ for i = 1:16
         
         statistic(1,i) = statistic(1,i) + at;
     end
-    statistic(1,i) = statistic(1,i)/(30*i*5*0.8);
+    statistic(1,i) = statistic(1,i)/(30*i*5*0.8); 
     statistic(1,i) = 1 - statistic(1,i);
 end
 

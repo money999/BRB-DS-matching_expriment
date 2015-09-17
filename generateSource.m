@@ -73,7 +73,6 @@ if spurious ~= 1
     claG2 = [claG2; normrnd(randi(2,num,1)*2-3, 2)];
     
 end
-
 end
 
 
