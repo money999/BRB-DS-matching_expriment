@@ -35,7 +35,7 @@ mcA = 1 - mc0;
 mH1p = mp1 * wAttri(1);
 mH0p = mp0 * wAttri(1);
 muHp = (1 - wAttri(1)) * ones(size(mp0));
-mwHp = mpA * wAttri(1)
+mwHp = mpA * wAttri(1);
 
 %mH1v = mv1 * wAttri(2);mv1 «0≤ª”√
 mH0v = mv0 * wAttri(2);
@@ -43,7 +43,7 @@ muHv = (1 - wAttri(2)) * ones(size(mv0));
 mwHv = mvA * wAttri(1);
 
 %mH1c = mc1 * wAttri(3);
-mH0c = mc0 * wAttri(3)
+mH0c = mc0 * wAttri(3);
 muHc = (1 - wAttri(3)) * ones(size(mc0));
 mwHc = mcA * wAttri(3);
 
