@@ -1,4 +1,4 @@
-function [ alpha1, alpha0, alphaA ] = erCombine( pos1, vel1, cla1, pos2, vel2, cla2 , p_p, p_r, v_p, v_r, wAttri )
+function [ alpha1, alpha0, alphaA, mH0, mH1 ] = erCombine( pos1, vel1, cla1, pos2, vel2, cla2 , p_p, p_r, v_p, v_r, wAttri )
 %UNTITLED 此处显示有关此函数的摘要
 %   wAttri 属性权重3-by-1，权重顺序是pvc
 %   此处显示详细说明

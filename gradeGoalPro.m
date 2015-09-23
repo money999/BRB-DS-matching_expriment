@@ -1,7 +1,7 @@
 function [ result ] = gradeGoalPro( alpha1, alpha0, alphaA, uti)
 %UNTITLED 此处显示有关此函数的摘要
 %   此处显示详细说明
-%   效用值的顺序是 1 ，0
+%   效用值的顺序是 1 ，0  
 
 f = uti(1) * alpha1 + uti(2) * alpha0 + (sum(uti) * alphaA)/2;
 
