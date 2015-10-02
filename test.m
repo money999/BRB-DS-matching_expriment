@@ -1,16 +1,25 @@
 
 
-[sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(10, 5, 2*pi, 0.5, 0.8);
-wAttri = ones(3,1) ;%设置属性权重，和为1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[em1,em0,emA, mH0, mH1] = erCombine(p1, v1, c1, p2, v2, c2, 0.7, 0.2, 0.7, 0.2, wAttri);
 
-[dm1,dm0,dmA] = dsCombine(p1, v1, c1, p2, v2, c2, 0.7, 0.2, 0.7, 0.2);
-
+[sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(1000, 5, 2*pi, 0.5, 1);
+rrrr = pdist2(v1, v2);
+max(max(rrrr))
 
 
 
 
 
+
+% x0 = [10;10;10];
+% A = [-1 -2 -2;1 2 2]; b = [0;72];
+% options = optimset('Display','off');
+% [y,fval] = fmincon('testfun',x0,A,b,[],[],[],[],[],options);
+
+% [sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(10, 5, 2*pi, 0.5, 0.8);
+% wAttri = ones(3,1) ;%设置属性权重，和为1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [em1,em0,emA, mH0, mH1] = erCombine(p1, v1, c1, p2, v2, c2, 0.7, 0.2, 0.7, 0.2, wAttri);
+% 
+% [dm1,dm0,dmA] = dsCombine(p1, v1, c1, p2, v2, c2, 0.7, 0.2, 0.7, 0.2);
 
 % num = 5;
 % m1 = [];
