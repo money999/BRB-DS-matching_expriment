@@ -1,9 +1,8 @@
 clear;
 
 [x,y]=meshgrid([-5:5],[-5:5]);
-X = [x(:) y(:)];
-z =mvnpdf(X,[0,0], 0.04*eye(2));
-h= mesh(x,y,reshape(z,11,11));
+z =mvnpdf();
+h= mesh(x,y,z);
 set(h,'edgecolor','none','facecolor','interp'); 
 
 % v_dir = 2*pi;

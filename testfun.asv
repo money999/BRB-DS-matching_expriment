@@ -1,0 +1,6 @@
+function y = testfun(x)
+%y = -x(1) * x(2) * x(3);
+%y = sqrt( (sin(x(1))*x(3) - sin(x(2)*x(4)))^2 + (cos(x(1))*x(3) - cos(x(2)*x(4)))^2);
+y = pdist2([cos(x(1))*x(3)])
+end
+
