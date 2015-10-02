@@ -1,10 +1,10 @@
 clear;
 
-[x,y]=meshgrid([-5:5],[-5:5]);
-X = [x(:) y(:)];
-z =mvnpdf(X,[0,0], 0.04*eye(2));
-h= mesh(x,y,reshape(z,11,11));
-set(h,'edgecolor','none','facecolor','interp'); 
+% [x,y]=meshgrid([-5:5],[-5:5]);
+% X = [x(:) y(:)];
+% z =mvnpdf(X,[0,0], 0.04*eye(2));
+% h= mesh(x,y,reshape(z,11,11));
+% set(h,'edgecolor','none','facecolor','interp'); 
 
 % v_dir = 2*pi;
 % v_nor = 0.5;
@@ -32,14 +32,14 @@ set(h,'edgecolor','none','facecolor','interp');
 % min(min(rrrr))
 
 
-% x0 = [pi; 0; 0.5; 0.3];
-% A = [eye(4); -eye(4)]; b = [2*pi; 2*pi; 0.5; 0.5; 0; 0; 0; 0];
-% options = optimset('Display','notify');
-% [y,fval] = fmincon('testfun',x0,[],[],[],[],[0;0;0;0],[2*pi;2*pi;0.5;0.5],[],options);
-% %[y,fval,flag] = fmincon('testfun',x0,A,b,[],[],[],[],[],options);
-% y
-% fval
-% flag
+x0 = [pi; 0; 0.5; 0.3];
+A = [eye(4); -eye(4)]; b = [2*pi; 2*pi; 0.5; 0.5; 0; 0; 0; 0];
+options = optimset('Display','notify');
+[y,fval,flag] = fmincon('testfun',x0,[],[],[],[],[0;0;0;0],[2*pi;2*pi;0.5;0.5],[],options);
+%[y,fval,flag] = fmincon('testfun',x0,A,b,[],[],[],[],[],options);
+y
+fval
+flag
 
 % [sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(10, 5, 2*pi, 0.5, 0.8);
 % wAttri = ones(3,1) ;%设置属性权重，和为1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
