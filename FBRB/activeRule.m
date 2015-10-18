@@ -9,11 +9,48 @@ c2tm1 = normpdf(p2.c, -1,2)/(normpdf(p2.c, -1,2) + normpdf(p2.c, 1,2));
 c2tm2 = 1-c2tm1;
 cdis = c1tm1*c2tm2 + c1tm2*c2tm1;
 
+
+pArry = sort(unique([rule.p]));
+vArry = sort(unique([rule.v]));
+cArry = sort(unique([rule.c]));
+
+if(isempty(find(pArry == pdis,1)))
+    pArry = [pArry(find(pArry<pdis, 1, 'last')) pArry(find(pArry>pdis, 1, 'first'))];
+else
+    pArry = pdis;
+end
+
+if(isempty(find(vArry == vdis,1)))
+    vArry = [vArry(find(vArry<vdis, 1, 'last')) vArry(find(vArry>vdis, 1, 'first'))];
+else
+    vArry = vdis;
+end
+
+if(isempty(find(cArry == cdis,1)))
+    cArry = [cArry(find(cArry<cdis, 1, 'last')) cArry(find(cArry>cdis, 1, 'first'))];
+else
+    cArry = cdis;
+end
+%把没激活的规则统统删掉
+dim = size(rule, 2);
+i = 1;
+while(1)
+    if(isempty(find(pArry == rule(i).p,1)) || isempty(find(vArry == rule(i).v,1)) || isempty(find(cArry == rule(i).c,1)))
+        rule(i) = [];
+        dim = dim - 1;
+    else
+        i = i+1;
+    end
+    if(i > dim)
+        break;
+    end
+end
+
 dim = size(rule, 2);
 
 for i = 1:dim
     rule(i).wPAnor = rule(i).wPA ./ max(rule(i).wPA);
-    rule(i).wAct = rule(i).wR * rule(i).wPAnor(1)*pdis * rule(i).wPAnor(2)*vdis * rule(i).wPAnor(3)*cdis;
+    rule(i).wAct = rule(i).wR * rule(i).wPAnor(1)*matDeg(pdis, rule(i).p, pArry) * rule(i).wPAnor(2) * matDeg(vdis, rule(i).v, vArry) * rule(i).wPAnor(3) * matDeg(cdis, rule(i).c, cArry);
 end
 
 wSumAct = sum([rule.wAct]);
@@ -25,7 +62,7 @@ for i = 1:dim
     rule(i).B0 = rule(i).wAct * rule(i).B0;
     rule(i).B1 = rule(i).wAct * rule(i).B1;
     rule(i).mw = rule(i).wAct * (1 - rule(i).B0 - rule(i).B1);
-    rule(1).mu = 1 - rule(i).wAct;
+    rule(i).mu = 1 - rule(i).wAct;%%%这里把i写成1了！！！
 end
 %%%%%%%%%%%%%%%%%%%%%%%%ER解析公式合成%%%%%%%%%%%%%%%%%%%%%%%%
 %cu -
@@ -46,5 +83,17 @@ Be0 = c0 / (1 - cu);
 Be1 = c1 / (1 - cu);
 BeA = cw / (1 - cu);
 
+if(Be0<0 || Be1<0)
+    kkkk = 1;
 end
 
+end
+
+
+function det = matDeg(dis, att, arry)
+if dis == att
+    det = 1;
+else
+    det = abs(dis - arry(3 - find(arry == att))) / abs(arry(2) - arry(1));
+end
+end

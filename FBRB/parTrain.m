@@ -5,7 +5,7 @@ function [ rule, x,fval,flag] = parTrain( pNum )
 
 
 [sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(pNum, 5, 2*pi, 0.5, 1);
-rule = initRule(7.5, 2.5, 1, 5, 5, 5);
+rule = initRule(7.5, 2.5, 1, 3, 3, 3);
 
 rNum = size(rule,2);
 
@@ -21,9 +21,18 @@ lb = zeros(rNum * 6, 1);
 ub = ones(rNum * 6, 1);
 
 
-options = optimset('Display','iter');
+options = optimset('Display' , 'Iter' , 'MaxFunEvals' , 20000*length(x0) , 'MaxIter', 10000 , 'TolFun' , 1e-6 , 'TolX' , 1e-6 , 'TolCon', 1e-6);
 [x,fval,flag] = fmincon(@(x) fminFun(p1,v1,c1, p2,v2,c2,rule, x ) ,x0, A, b,[],[], lb, ub,[],options);
 
+xN = 0;
+rNum = size(rule,2);
+for i = 1:rNum
+    rule(i).wPA = [x(xN + 1) x(xN + 2) x(xN + 3)];
+    rule(i).wR = x(xN + 4);
+    rule(i).B0 = x(xN + 5);
+    rule(i).B1 = x(xN + 6);
+    xN = xN + 6;
+end
 
 end
 

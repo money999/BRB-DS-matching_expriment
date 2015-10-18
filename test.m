@@ -1,9 +1,40 @@
 clear;
 
-pNum = 100;
-[ rule, x,fval,flag] = parTrain( pNum );
-fval
-flag
+rNum = 27;
+x0 = ones(rNum * 6, 1) * 0.5;
+A = zeros(rNum, rNum*6);
+for i = 1:rNum
+      k = i*6;
+      A(i, k) = 1;
+      A(i, k-1) = 1;
+end
+b = ones(rNum,1); %A*x0 = b
+
+% pNum = 100;
+% [sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(pNum, 5, 2*pi, 0.5, 1);
+% rule = initRule(7.5, 2.5, 1, 3, 3, 3);
+% 
+% rNum = size(rule,2);
+% 
+% x0 = ones(rNum * 6, 1) * 0.4;
+% A = zeros(rNum, rNum*6);
+% for i = 1:rNum
+%       k = i*6;
+%       A(i, k) = 1;
+%       A(i, k-1) = 1;
+% end
+% b = ones(rNum,1); %A*x0 = b
+% lb = zeros(rNum * 6, 1);
+% ub = ones(rNum * 6, 1);
+% 
+% options = optimset('Display','iter');
+% [x,fval,flag] = fmincon(@(x) fminFun(p1,v1,c1, p2,v2,c2,rule, x ) ,x0, A, b,[],[], lb, ub,[],options);
+
+
+% pNum = 100;
+% [ rule, x,fval,flag] = parTrain( pNum );
+% fval
+% flag
 
 % p = 3;
 % A = zeros(p, p*6);
@@ -63,7 +94,7 @@ flag
 % b = 2;
 % c = 3;
 % %A = [eye(4); -eye(4)]; b = [2*pi; 2*pi; 0.5; 0.5; 0; 0; 0; 0];
-% options = optimset('Display','notify');
+% options = optimset('Display','iter');
 % [y,fval,flag] = fmincon(@(x) testfun(a,b,c,x),x0,[],[],[],[],[0; 0 ; 0],[30; 30; 30],[],options);
 % %[y,fval,flag] = fmincon('testfun',x0,A,b,[],[],[],[],[],options);
 % y

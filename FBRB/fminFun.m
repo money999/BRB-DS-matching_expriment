@@ -3,8 +3,8 @@ function y = fminFun(p1,v1,c1, p2,v2,c2,rule , x )
 %   此处显示详细说明
 
 xN = 0;
-pNum = size(p1,2);
-for i = 1:pNum
+rNum = size(rule,2);
+for i = 1:rNum
     rule(i).wPA = [x(xN + 1) x(xN + 2) x(xN + 3)];
     rule(i).wR = x(xN + 4);
     rule(i).B0 = x(xN + 5);
@@ -12,7 +12,11 @@ for i = 1:pNum
     xN = xN + 6;
 end
 
-
+pNum = size(p1, 1);
+m1(pNum, pNum) = 0;
+m0(pNum, pNum) = 0;
+mA(pNum, pNum) = 0;
+y = 0;
 for i = 1:pNum
     for j = 1:pNum
         po1.p = p1(i,:);
@@ -25,15 +29,31 @@ for i = 1:pNum
         m1(i,j) = Be1;
         m0(i,j) = Be0;
         mA(i,j) = BeA;
+        
+        if(Be0 < 0)
+            disp(Be0);
+        end
+        
+        if(Be1 < 0)
+            disp(Be1);
+        end
+        
+        if(i == j)
+            y = y + Be0;
+        else
+            y = y + Be1;
+        end
     end
 end
 
-[result] = goalPro(m1, m0, mA);
-%dim = size(result,1) * 0.8;%只取0.8的部分比较准确性
-%result = result((1:dim),(1:dim));
-at = size(result,1) - sum(diag(result));
-preRate = at / pNum;
+% [result] = goalPro(m1, m0, mA);
+% %dim = size(result,1) * 0.8;%只取0.8的部分比较准确性
+% %result = result((1:dim),(1:dim));
+% 
+% at = size(result,1) - sum(diag(result));
+% preRate = at / pNum;
+% y = preRate;
+% y
 
-y = preRate;
 end
 
