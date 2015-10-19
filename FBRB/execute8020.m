@@ -1,8 +1,8 @@
 clear;
 
-load('rule.mat');
+load('rule20.mat');
 
-
+rule = rule20;
 statistic = zeros(1,16);
 for i = 1:16
     for j = 1:30
@@ -34,8 +34,8 @@ for i = 1:16
         
         statistic(1,i) = statistic(1,i) + at;
     end
-    i
     statistic(1,i) = statistic(1,i)/(30*i*5*0.8);
     statistic(1,i) = 1 - statistic(1,i);
+    statistic(1,i)
 end
 plot(5:5:80, statistic);

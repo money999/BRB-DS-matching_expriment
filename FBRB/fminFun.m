@@ -3,13 +3,15 @@ function y = fminFun(p1,v1,c1, p2,v2,c2,rule , x )
 %   此处显示详细说明
 
 xN = 0;
-rNum = size(rule,2);
+rNum = size(rule, 2);
+xNum = size(x, 1);
 for i = 1:rNum
-    rule(i).wPA = [x(xN + 1) x(xN + 2) x(xN + 3)];
-    rule(i).wR = x(xN + 4);
-    rule(i).B0 = x(xN + 5);
-    rule(i).B1 = x(xN + 6);
-    xN = xN + 6;
+    rule(i).B0 = x(xN + 1);
+    rule(i).B1 = x(xN + 2);
+    rule(i).wR = x(xN + 3);
+    xN = xN + 3;
+    
+    rule(i).wPA = [x(xNum - 2) x(xNum - 1) x(xNum)];%每一条规则的前提属性权重都一样
 end
 
 pNum = size(p1, 1);
