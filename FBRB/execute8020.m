@@ -1,11 +1,10 @@
 clear;
-
-load('rule20.mat');
-
-rule = rule20;
+load('rule-30-right-wpaordif-0.1_0.5_0.9.mat')
+%rule = rule20;
 statistic = zeros(1,16);
+jSize = 2;
 for i = 1:16
-    for j = 1:30
+    for j = 1:jSize
         [sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(i*5, 5, 2*pi, 0.5, 0.8);
         m1=[];
         m0=[];
@@ -34,7 +33,7 @@ for i = 1:16
         
         statistic(1,i) = statistic(1,i) + at;
     end
-    statistic(1,i) = statistic(1,i)/(30*i*5*0.8);
+    statistic(1,i) = statistic(1,i)/(jSize*i*5*0.8);
     statistic(1,i) = 1 - statistic(1,i);
     statistic(1,i)
 end

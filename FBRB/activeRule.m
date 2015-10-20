@@ -50,7 +50,7 @@ dim = size(rule, 2);
 
 for i = 1:dim
     rule(i).wPAnor = rule(i).wPA ./ max(rule(i).wPA);
-    rule(i).wAct = rule(i).wR * rule(i).wPAnor(1)*matDeg(pdis, rule(i).p, pArry) * rule(i).wPAnor(2) * matDeg(vdis, rule(i).v, vArry) * rule(i).wPAnor(3) * matDeg(cdis, rule(i).c, cArry);
+    rule(i).wAct = rule(i).wR * matDeg(pdis, rule(i).p, pArry)^rule(i).wPAnor(1) *  matDeg(vdis, rule(i).v, vArry)^rule(i).wPAnor(2) *  matDeg(cdis, rule(i).c, cArry)^rule(i).wPAnor(3);
 end
 
 wSumAct = sum([rule.wAct]);
@@ -58,9 +58,11 @@ for i = 1:dim
     rule(i).wAct = rule(i).wAct ./ wSumAct;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%激活规则合成%%%%%%%%%%%%%%%%%%%%%%%%%
-for i = 1:dim
-    rule(i).B0 = rule(i).wAct * rule(i).B0;
-    rule(i).B1 = rule(i).wAct * rule(i).B1;
+for i = 1:dim%%%%妈的这里写错了，下面那个算mw的B0和B1已经改变了，所以还是写m比较好
+    %rule(i).B0 = rule(i).wAct * rule(i).B0;
+    %rule(i).B1 = rule(i).wAct * rule(i).B1;
+    rule(i).m0 = rule(i).wAct * rule(i).B0;
+    rule(i).m1 = rule(i).wAct * rule(i).B1;
     rule(i).mw = rule(i).wAct * (1 - rule(i).B0 - rule(i).B1);
     rule(i).mu = 1 - rule(i).wAct;%%%这里把i写成1了！！！
 end
@@ -69,8 +71,8 @@ end
 %cw ~
 cu = prod([rule.mu]);
 cw = prod([rule.mu] + [rule.mw]) - cu;
-c0 = prod([rule.B0] + [rule.mw] + [rule.mu]) - (cu + cw);
-c1 = prod([rule.B1] + [rule.mw] + [rule.mu]) - (cu + cw);
+c0 = prod([rule.m0] + [rule.mw] + [rule.mu]) - (cu + cw);
+c1 = prod([rule.m1] + [rule.mw] + [rule.mu]) - (cu + cw);
 
 k = cu + cw + c0 + c1;
 cu = cu / k;
@@ -94,6 +96,7 @@ function det = matDeg(dis, att, arry)
 if dis == att
     det = 1;
 else
-    det = abs(dis - arry(3 - find(arry == att))) / abs(arry(2) - arry(1));
+    det = 1 - abs(dis - att)/abs(arry(2) - arry(1));
+    %det = abs(dis - arry(3 - find(arry == att))) / abs(arry(2) - arry(1));
 end
 end
