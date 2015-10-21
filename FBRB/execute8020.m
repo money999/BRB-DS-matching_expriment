@@ -1,8 +1,8 @@
 clear;
-load('rule-30-right-wpaordif-0.1_0.5_0.9.mat')
+load('D:\matlab\work_script\FBRB\rule-20-new.mat')
 %rule = rule20;
 statistic = zeros(1,16);
-jSize = 2;
+jSize = 5;
 for i = 1:16
     for j = 1:jSize
         [sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(i*5, 5, 2*pi, 0.5, 0.8);
@@ -24,8 +24,9 @@ for i = 1:16
                 mA(ii,jj) = BeA;
             end
         end
-        
         [result] = goalPro(m1, m0, mA);
+        
+        
         
         dim = size(result,1) * 0.8;%只取0.8的部分比较准确性
         result = result((1:dim),(1:dim));
