@@ -6,21 +6,21 @@ function [ rule, x,fval,flag] = parTrain( pNum )
 [sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(pNum, 5, 2*pi, 0.5, 1);
 
 %rule = initRule(7.5, 2.5, 1, 3, 3, 3);
-pvc = [0 4 8; 0 1.5 3; 0 0.5 1];
+pvc = [0 8; 0 3; 0 1];
 rNum = size(pvc,2) ^ 3;
 
-x0 = [ones(rNum * 3, 1) * 0.5; 0.1; 0.8; 0.9; 4; 1.5; 0.5];
+x0 = [ones(rNum * 3, 1) * 0.5; 0.1; 0.8; 0.9];
 
 
-A = zeros(rNum, rNum * 3 + 3 + 3);
+A = zeros(rNum, rNum * 3 + 3);
 for i = 1:rNum
       k = i * 3;
       A(i, k - 2) = 1;
       A(i, k - 1) = 1;
 end
 b = ones(rNum,1); %A*x0 = b
-lb = [zeros(rNum * 3 + 3, 1); 0; 0; 0];
-ub = [ones(rNum * 3 + 3, 1); 8; 3; 1];
+lb = zeros(rNum * 3 + 3, 1);
+ub = ones(rNum * 3 + 3, 1);
 
 
 options = optimset('Display' , 'Iter' , 'MaxFunEvals' , 20000*length(x0) , 'MaxIter', 10000 , 'TolFun' , 1e-6 , 'TolX' , 1e-6 , 'TolCon', 1e-6);
@@ -39,10 +39,10 @@ rule(rNum).p = 0;
 rule(rNum).v = 0;
 rule(rNum).c = 0;
 xNum = size(x, 1);
-pvc(1,2) = x(xNum - 2);
-pvc(2,2) = x(xNum - 1);
-pvc(3,2) = x(xNum);
-wPA = [x(xNum - 5) x(xNum - 4) x(xNum - 3)];
+% pvc(1,2) = x(xNum - 2);
+% pvc(2,2) = x(xNum - 1);
+% pvc(3,2) = x(xNum);
+wPA = [x(xNum - 2) x(xNum - 1) x(xNum - 0)];
 seg = size(pvc, 2);
 for i = 1:seg
     for j = 1:seg

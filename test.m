@@ -1,5 +1,17 @@
 clear;
 
+[sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(5, 5, 2*pi, 0.5, 1);
+plot(p1(:,1),p1(:,2),'.r')
+hold on
+plot(p2(:,1),p2(:,2),'.g')
+figure
+
+plot(v1(:,1),v1(:,2),'.r')
+hold on
+plot(v2(:,1),v2(:,2),'.g')
+
+
+
 
 % v_dir = 2*pi;
 % v_nor = 0.5;
@@ -12,8 +24,8 @@ clear;
 % 
 % plot(velocity(:,1), velocity(:,2),'.');
 
-
-[ rule, x,fval,flag] = parTrain( 20 )
+%
+% [ rule, x,fval,flag] = parTrain( 20 )
 
 % pNum = 100;
 % [sp, sv, sc, p1, v1, c1, p2, v2, c2] = generateSource(pNum, 5, 2*pi, 0.5, 1);
